@@ -1,0 +1,408 @@
+/*PATHFINDER STYLES*/
+body{
+    position:relative;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    font-family: Nunito Sans;
+    background-color: rgb(70, 70, 70);
+    overflow-x: hidden;
+}
+
+.main_film{
+    position:relative;
+    z-index: 0;
+    background-color: rgba(0,0,0,0.88);
+}
+
+/*--------NAVBAR--------------------------------------------------*/
+a{
+    text-decoration: none;
+    color:white;
+    transition:0.25s;
+}
+a:hover{
+    color:orange;
+    transition:0.35s;
+}
+.banner{
+    position: sticky;
+    z-index: 999;
+    top: 0;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr  1fr;
+    align-items: center;
+    height: 8vh;
+    background-color: black;
+   
+}
+.logo{
+    position:relative;
+    padding: 0 3rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    
+}
+.nav_links{
+    padding: 0;
+    margin:0;
+    position:relative;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    height: 100%;
+}
+.nav_links li{
+    display:inline-block;
+    font-size:1rem;
+}
+/*--------END OF NAVBAR-------------------------------------------*/
+
+.legend{
+    position: sticky;
+    z-index: 1;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    place-items: center;
+    height: 10vh;
+    background-color:rgb(255, 171, 75);
+}
+
+.source{
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:30px;
+    width: 30%;
+    height: 35%;
+    transition: 0.35s;
+}
+.source:hover{
+    cursor:pointer;
+    color:black;
+    background-color:white;
+    transition: 0.5s ease-out;
+}
+.source.clicked{
+    border:white 2px solid;
+}
+
+.target{
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:30px;
+    width: 30%;
+    height: 35%;
+    transition: 0.35s ease-in;
+}
+.target:hover{
+    cursor:pointer;
+    color:black;
+    background-color:white;
+    transition: 0.5s ease-out;
+}
+.target.clicked{
+    border:white 2px solid;
+}
+
+.package{
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:30px;
+    width: 30%;
+    height: 35%;
+    transition: 0.35s ease-in;
+}
+.package:hover{
+    cursor:pointer;
+    color:black;
+    background-color:white;
+    transition: 0.5s ease-out;
+}
+.package.clicked{
+    border: white 2px solid;
+}
+
+.walls{
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:30px;
+    width: 30%;
+    height: 35%;
+    transition: 0.35s ease-in;
+}
+.walls:hover{
+    cursor:pointer;
+    color:black;
+    background-color:white;
+    transition: 0.5s ease-out;
+}
+.walls.clicked{
+    border:white 2px solid;
+}
+
+.path_finding_container{
+    position:absolute;
+    display:flex;
+    align-items: center;
+    justify-content:space-around;
+    background-color: white;
+    height: 82vh;
+    width: 100vw;
+    left: 0;
+}
+
+/*-------Graph------------------------------------------------*/
+.graph{
+    position:relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    height: 70vh;
+    width: 70vh;
+}
+.node{
+    border: black 1px solid;
+    place-content: center;
+    transition: 0.25s;
+}
+.node.visited{
+    background:rgba(51, 156, 170, 0.7);
+    transition-delay: 2s;
+    transition: 1s;
+}
+.node.path{
+    background-color:rgba(255,184,28, 0.8);
+    transition: 0.5s ease-in-out;
+}
+.node:hover{
+    background:rgb(255, 171, 75);
+    transition: 0.35s;
+}
+
+.node_source{
+    position: relative;
+    background: url(images/drone.png) no-repeat center;
+    border: black 1px solid;
+    background-size: 80%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.node_source.visited{
+    background-color:rgba(255,184,28, 0.8);
+    transition: 1s;
+}
+.node_source.path{
+    background-color:rgba(255,184,28, 0.8);
+    transition: 1s;
+}
+.node_source:hover{
+    background-color:rgba(55, 141, 255, 0.452);
+}
+
+
+.node_target{
+    border: black 1px  solid;
+    background: url(images/target.png) no-repeat center;
+    background-size: contain;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.node_target.visited{
+    background-color:rgba(255,184,28, 0.8);
+    transition: 1s;
+}
+.node_target.path{
+    background-color:rgba(255,184,28, 0.8);
+    transition: 1s;
+}
+.node_target:hover{
+    background-color:rgba(55, 141, 255, 0.452);
+}
+
+.node_package{
+    border: black 1px  solid;
+    background: url(images/star.png) no-repeat center;
+    background-size: contain;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    transition: 0.35s;
+}
+.node_package:hover{
+    background-color:rgba(55, 141, 255, 0.452);
+    transition:0.35s ease-in;
+}
+.node_package.path{
+    background-color:rgba(255,184,28, 0.8);
+    transition: 0.5s ease-in-out;
+}
+.node_package.visited{
+    border: black 1px  solid;
+    background: url(images/star.png) no-repeat center;
+    background-size: contain;
+    background-color:rgba(255,184,28, 0.8);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    transition: 0.35s;
+}
+
+.node_walls{
+    background-color: black;
+    transition:0.35s;
+}
+.node_walls:hover{
+    background-color:rgba(34, 33, 33, 0.88);
+    transition: 0.35s ease-in;
+}
+/*-------Graph------------------------------------------------*/
+
+/*-------Start-------------------------------------------*/
+.start_container{
+    height: 100%;
+    width: 30vw;
+    position: relative;
+    display:grid;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+/*LOGO container*/
+.logo_start{
+    background: url(images/80f6a147201b44907e486435988bbf3f.jpg) no-repeat center;
+    background-size: 100%;
+    height: 40vh;
+    width: 100%;
+}
+
+/*buttons and etc container*/
+.buttons_container{
+    display:grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    place-items: center;
+    justify-content: center;
+    align-items: center;
+}
+.start_pathfinding{
+    position:relative;
+    border-radius: 50%;
+    /* background: url(images/play-button-arrowhead.png) no-repeat center;
+    background-size: 30%; */
+
+    font-size: 1.5rem;
+    color: black;
+    height: 7vh;
+    width: 7vh;
+
+    box-shadow: inset 0 0 0 0 rgb(255,184,28);
+
+    cursor:pointer;
+    text-decoration:none;
+    transition: 0.35s;
+}
+
+.start_pathfinding:hover{
+    box-shadow: inset 0 0 0 7vh rgb(255,184,28);
+    border-radius: 40%;
+    transition: 0.35s;
+}
+
+/*pathfinding indicator*/
+.button_group_1{
+    display:inline-flex;
+    align-items: center;
+    padding: 1rem 0;
+    opacity:0.4;
+    transition: 1s;
+}
+.button_group_1.active{
+    opacity:1;
+    transition: 1s;
+}
+.button_group_1 h3{
+    display:flex;
+    padding: 0 2rem 0 0;
+}
+.start_indicator{
+    height: 7vh;
+    width: 7vh;
+    background: url(images/airplane.png) no-repeat center;
+    background-size: 60%;
+    border-radius: 50%;
+    transition: 0.35s ease;
+}
+.start_indicator.active{
+    position:relative;
+    z-index: 999;
+    height: 7vh;
+    width: 7vh;
+    background: url(images/airplane.png) no-repeat center;
+    background-size: 60%;
+    border-radius: 50%;
+    background-color: rgb(100, 255, 28);
+    transition: 1s ease;
+}
+
+/*buttons for start and view details*/
+.button_group_2{
+    display:flex;
+    align-items: center;
+    padding: 1rem 0;
+}
+.button_group_2 h3{
+    display:flex;
+    padding: 0 2rem 0 0;
+}
+
+.more_details{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color:black;
+
+    box-shadow: inset 0 0 0 0 rgb(255,184,28);
+    outline:none;
+
+    height: 5vh;
+    width: 10vw;
+
+    cursor:pointer;
+    text-decoration:none;
+    transition: 0.35s ease-out;
+}
+.more_details:hover{
+    border: white 0.125rem solid;
+    color:black;
+    box-shadow: inset 10vw 0 0 0 rgb(243, 166, 0);
+    transition: ease 0.35s;
+}
+/*-------Start-------------------------------------------*/
+
+.Highlights{
+    display:grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    place-items: center;
+    width: 30vw;
+    height: 100%;
+}
+
+#Drone_highlight_title{
+    display:inline-block;
+    color: rgb(255, 145, 0);
+    font-size: 2rem;
+    padding: 0 0.25rem 0 0.25rem;
+}
+.main_highlight_title p{
+    display: inline-block;
+    font-size: 2rem;
+}
