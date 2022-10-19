@@ -14,3 +14,5 @@ Users are also able to add elements such as walls and packages to obstruct and a
 The following algorithm takes inspiration from Djikstra's Algorithm, an algorithm which utilizes BFS (Breadth First Search) in order to find the shortest path from a root node to the other nodes. In this iteration however, I have used a 15 x 15 grid (each of which representing a node). Rather than having two children nodes, the root will potentially have up to 4 possible children. Hence, I opted to use an array rather than a tree to navigate through the grid.
 
 ![image](https://user-images.githubusercontent.com/99672285/196706967-31bf88d9-5bae-4b08-9aa1-8d5ff8f128db.png)
+
+The logic of the algorithm is to check each adjacent node whether it is possible to expand that way and assign that visited node a 'distance-away', until it finds the node it is looking for. Then by having each visited node remember its 'parent-node' (the neightbor node which caused the current node to be visited) I can print and remember the path that was taken.
