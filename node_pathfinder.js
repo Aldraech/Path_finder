@@ -274,10 +274,12 @@ class Graph {
 
         var i = -1;
         var found = false;
+        var lost = true;
 
         //to find all of the packages
         if(number_of_packages != 0){
             while (true) {
+                lost = true;
                 i++;
                 await waitforme(150);
                 for (let j = 0; j < (V * V); j++) {
@@ -293,6 +295,7 @@ class Graph {
                                 number_of_packages--;
 
                                 this.shortestPath(j + V);
+                                lost = false;
                                 found = true;
                             }
                             /*regular node*/
@@ -300,6 +303,7 @@ class Graph {
                                 this.#chart[j + V].Visit(j + V);
                                 this.#chart[j + V].setPriority(i + 1);
                                 this.#chart[j + V].addParent(j);
+                                lost = false;
                             }
                         }
                         if (this.inRange(j - V)) {
@@ -312,12 +316,14 @@ class Graph {
                                 number_of_packages--;
 
                                 this.shortestPath(j - V);
+                                lost = false;
                                 found = true;
                             }
                             else if (document.getElementById(j - V).className != 'node_walls' && (!this.#chart[j - V].isVisited()) && (this.#chart[j - V].x() == this.#chart[j].x())) {
                                 this.#chart[j - V].Visit(j - V);
                                 this.#chart[j - V].setPriority(i + 1);
                                 this.#chart[j - V].addParent(j);
+                                lost = false;
                             }
                         }
                         if (this.inRange(j + 1)) {
@@ -331,11 +337,13 @@ class Graph {
 
                                 this.shortestPath(j + 1);
                                 found = true;
+                                lost = false;
                             }
                             else if (document.getElementById(j + 1).className != 'node_walls' && (!this.#chart[j + 1].isVisited()) && (this.#chart[j + 1].y() == this.#chart[j].y())) {
                                 this.#chart[j + 1].Visit(j + 1);
                                 this.#chart[j + 1].setPriority(i + 1);
                                 this.#chart[j + 1].addParent(j);
+                                lost = false;
                             }
                         }
                         if (this.inRange(j - 1)) {
@@ -349,26 +357,33 @@ class Graph {
 
                                 this.shortestPath(j - 1);
                                 found = true;
+                                lost = false;
                             }
                             else if (document.getElementById(j - 1).className != 'node_walls' && (!this.#chart[j - 1].isVisited()) && (this.#chart[j - 1].y() == this.#chart[j].y())) {
                                 this.#chart[j - 1].Visit(j - 1);
                                 this.#chart[j - 1].setPriority(i + 1);
                                 this.#chart[j - 1].addParent(j);
+                                lost = false;
                             }
                         }
                     }
                 }
                 if (found) {
                     break;
+                }if (lost) {
+                    confirm('There is no possible path to get to reach a package!');
+                    return;
                 }
             }
         //to find the target node
         }else{
             while (true) {
                 i++;
+                lost = true;
                 for (let j = 0; j < (V * V); j++) {
                     if(this.#chart[this.#t].isVisited()){
                         found = true;
+                        lost = false;
                         console.log('DONE');
                         this.remember_path(source_node, this.#t);
                         break;
@@ -379,6 +394,7 @@ class Graph {
                                 this.#chart[j - V].Visit(j - V);
                                 this.#chart[j - V].setPriority(i + 1);
                                 this.#chart[j - V].addParent(j);
+                                lost = false;
                             }
                         }
                         if (this.inRange(j + V)) {
@@ -387,6 +403,7 @@ class Graph {
                                 this.#chart[j + V].Visit(j + V);
                                 this.#chart[j + V].setPriority(i + 1);
                                 this.#chart[j + V].addParent(j);
+                                lost = false;
                             }
                         }
                         if (this.inRange(j + 1)) {
@@ -394,6 +411,7 @@ class Graph {
                                 this.#chart[j + 1].Visit(j + 1);
                                 this.#chart[j + 1].setPriority(i + 1);
                                 this.#chart[j + 1].addParent(j);
+                                lost = false;
                             }
                         }
                         if (this.inRange(j - 1)) {
@@ -401,6 +419,7 @@ class Graph {
                                 this.#chart[j - 1].Visit(j - 1);
                                 this.#chart[j - 1].setPriority(i + 1);
                                 this.#chart[j - 1].addParent(j);
+                                lost = false;
                             }
                         }
                     }
@@ -408,6 +427,9 @@ class Graph {
                 if (found) {
                     this.printPath();
                     break;
+                }if (lost) {
+                    confirm('There is no possible path to get to reach the target!');
+                    return;
                 }
             }
         }

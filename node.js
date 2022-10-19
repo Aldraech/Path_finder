@@ -5,7 +5,7 @@ const section_3 = document.querySelector('.section_3');
 
 const disappearOptions = {
     root: null,
-    threshold: 0.95,
+    threshold: 1,
 };
 
 const disappearOnScroll = new IntersectionObserver(function(entries, disappearOnScroll) {
