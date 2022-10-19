@@ -152,17 +152,6 @@ item.id;
 */
 
 /*UTILITY FUNCTIONS*/
-
-function reset_visited_nodes(num){
-    document.getElementById(num).className = 'node_package_visited';
-    number_of_packages--;
-    for(let i = 0; i < V*V; i++){
-        document.getElementById(i).classList.remove('visited');
-    }
-    console.log(number_of_packages);
-    console.log(document.getElementById(num).className);
-}
-
 function waitforme(ms){
     return new Promise(resolve =>{
         setTimeout(()=>{resolve('')},ms);
